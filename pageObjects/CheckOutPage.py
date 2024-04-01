@@ -6,8 +6,10 @@ from pageObjects.ConfirmationPage import ConfirmationPage
 class CheckOutPage:
     def __init__(self, driver):
         self.driver = driver
-
-    checkoutProducts = (By.XPATH, ("//tbody/tr/td[2]/p"))
+    actualCheckoutProductList = []
+    checkoutProductList = ["Cucumber - 1 Kg", "Raspberry - 1/4 Kg", "Strawberry - 1/4 Kg"]
+    totalItemPrice = 0
+    checkoutProducts = (By.XPATH, "//tbody/tr/td[2]/p")
     itemPrices = (By.XPATH, "//tbody/tr/td[5]")
     promoCodeInput = (By.CSS_SELECTOR, ".promoCode")
     promoButton = (By.CSS_SELECTOR, ".promoBtn")
@@ -31,7 +33,7 @@ class CheckOutPage:
     def get_promo_info(self):
         return self.driver.find_element(*CheckOutPage.promoInfo)
 
-    def get_total_item_amount(self):
+    def get_actual_total_item_amount(self):
         return self.driver.find_element(*CheckOutPage.totalItemsAmount)
 
     def get_total_amount_after_discount(self):
